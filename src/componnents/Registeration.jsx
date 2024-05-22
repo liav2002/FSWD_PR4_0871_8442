@@ -11,6 +11,7 @@ function Registeration(props) {
     }
 
     function signUp(e) {
+      console.log("In SignUp Function.")
       e.preventDefault();
       const username = document.getElementById("signUp_Username").value;
       const email = document.getElementById("signUp_Email").value;
@@ -38,7 +39,7 @@ function Registeration(props) {
       // Save the updated players array back to local storage
       localStorage.setItem('players', JSON.stringify(existingPlayers));
       // Update the state or perform any other necessary actions
-      props.addPlayerToTheGame(newPlayer);
+      props.addPlayer(newPlayer);
       setShowModal(false);
     }
     
@@ -50,7 +51,7 @@ function Registeration(props) {
       const foundPlayer = existingPlayers.find(player => player.username === username);
       if (foundPlayer) {
         if (foundPlayer.password === password) {
-          props.addPlayerToTheGame(foundPlayer);
+          props.addPlayer(foundPlayer);
           setShowModal(false);
         } else {
           alert('Incorrect password. Please try again.');
@@ -89,8 +90,8 @@ function Registeration(props) {
                               <div className="d-flex flex-row align-items-center mb-4">
                                 <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                                 <div className="form-outline flex-fill mb-0">
-                                  <input type="text" id={isSignIn ? "signIn_Username" : "signUp_username"} className="form-control" />
-                                  <label className="form-label" htmlFor={isSignIn ? "signIn_Username" : "signUp_username"}>
+                                  <input type="text" id={isSignIn ? "signIn_Username" : "signUp_Username"} className="form-control" />
+                                  <label className="form-label" htmlFor={isSignIn ? "signIn_Username" : "signUp_Username"}>
                                     Username
                                   </label>
                                 </div>

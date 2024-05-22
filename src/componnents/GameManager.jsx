@@ -36,7 +36,7 @@ function GameManager() {
                 {!isGameStart && (
                     <div className="start-game">
                         <Registeration addPlayer={addPlayer} />
-                        <button type="button" onClick="startGame()" disabled={!currentGames.length}>
+                        <button type="button" onClick={startGame} disabled={!currentGames.length}>
                             <img src="https://media.giphy.com/media/EEf5PgJnnNZyGvhoSC/giphy.gif" alt="Start Game"/>
                         </button>
                     </div>
