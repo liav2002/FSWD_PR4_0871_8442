@@ -28,8 +28,23 @@ function GameManager() {
     return (
         <>
             <div className="container-fluid">
+                <div className="start-game">
+                    <button type="button">
+                        Add Player Button
+                    </button>
+                    <button type="button" onClick="startGame()" disabled={!currentGames.length}>
+                        <img src="https://media.giphy.com/media/EEf5PgJnnNZyGvhoSC/giphy.gif" alt="Start Game"/>
+                    </button>
+                </div>
+                
                 <div className="row">
-                    <h1>Still In Develop</h1>
+                    <div className="top-players">
+                        <h3>Top Players will be shown here</h3>
+                    </div>
+
+                    <div className="game-board">
+                        <h3>Game Board will be shown here</h3>
+                    </div>
                 </div>
             </div>
         </>
