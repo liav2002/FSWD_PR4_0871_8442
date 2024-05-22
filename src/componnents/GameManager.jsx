@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import Registeration from "./Registeration"
 
 function GameManager() {
     const [currentGames, setCurrentGames] = useState([]);
@@ -10,6 +11,10 @@ function GameManager() {
       };
 
     const addPlayer = (player) => {
+        setCurrentGames((prevGames) => [
+            ...prevGames,
+            { player: player, disable: true },
+          ]);
     };
 
     const startGame = () => {
@@ -30,10 +35,8 @@ function GameManager() {
             <div className="container-fluid">
                 {!isGameStart && (
                     <div className="start-game">
-                        <button type="button">
-                            Add Player Button
-                        </button>
-                        <button type="button" onClick="startGame()" disabled={!currentGames.length}>
+                        <Registeration addPlayer={addPlayer} />
+                        <button type="button" onClick={startGame} disabled={!currentGames.length}>
                             <img src="https://media.giphy.com/media/EEf5PgJnnNZyGvhoSC/giphy.gif" alt="Start Game"/>
                         </button>
                     </div>
