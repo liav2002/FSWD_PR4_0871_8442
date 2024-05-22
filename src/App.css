@@ -40,3 +40,61 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Additional Styles - By Liav Ariel */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+.container-fluid {
+  padding: 20px;
+}
+.start-game {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.start-game button {
+  border: 2px solid rgb(255, 0, 187);
+  background: none;
+  padding: 10px 20px; /* Added padding for equal sizing */
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s, border-color 0.3s;
+  margin-right: 10px; /* Space between buttons */
+  display: inline-flex; /* Align image and text */
+  align-items: center;
+  justify-content: center;
+}
+.start-game button img {
+  width: 50px; /* Adjusted image size for better alignment */
+  height: 50px;
+}
+.start-game button:hover {
+  border-color: #b30074;
+  background-color: #f57edb;
+}
+.row {
+  display: flex;
+  height: 100vh; /* Ensure it takes full height of the viewport */
+}
+.top-players {
+  flex: 1;
+  max-width: 20%;
+  padding: 10px;
+  background-color: #fff;
+  border-right: 1px solid #dee2e6;
+  overflow-y: auto;
+}
+.game-board {
+  flex: 3;
+  max-width: 60%;
+  padding: 10px;
+  background-color: #eee;
+  margin: 0 auto;
+  text-align: center;
+  overflow-y: auto;
+}
