@@ -59,6 +59,8 @@ body {
 }
 .start-game button {
   border: 2px solid rgb(255, 0, 187);
+  height: 85px;
+  width: 73%;
   background: none;
   padding: 10px 20px; /* Added padding for equal sizing */
   cursor: pointer;
