@@ -48,6 +48,11 @@ function Registeration(props) {
     const password = document.getElementById("signIn_Password").value;
     const existingPlayers = JSON.parse(localStorage.getItem('players')) || [];
     const foundPlayer = existingPlayers.find(player => player.username === username);
+    // Check if the user is already signed in
+    if (props.currentGames.some(game => game.player.username === username)) {
+      alert('User is already signed in.');
+      return;
+    }
     if (foundPlayer) {
       if (foundPlayer.password === password) {
         props.addPlayer(foundPlayer);

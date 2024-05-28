@@ -142,7 +142,7 @@ function GameManager() {
             <div className="container-fluid">
                 {!isGameStart && (
                     <div className="start-game">
-                        <Registeration addPlayer={addPlayer} />
+                        <Registeration addPlayer={addPlayer} currentGames={currentGames} />
                         <button type="button" onClick={startGame} disabled={!currentGames.length}>
                             <img src="https://media.giphy.com/media/EEf5PgJnnNZyGvhoSC/giphy.gif" alt="Start Game" />
                         </button>
