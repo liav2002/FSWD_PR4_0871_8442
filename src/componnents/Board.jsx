@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 
 function Board(props) {
   const handleQuitGame = () => {
-    props.quitOneGame(props.index);
+    props.quitGame(props.index);
   };
 
   const handleNewGameIndex = () => {
@@ -14,7 +14,7 @@ function Board(props) {
   return (
     <div className="card mt-3">
       <div className="card-body">
-        <h2>{props.game.player.userName}</h2>
+        <h2>{props.game.player.username}</h2>
         <br />
         {props.game.isWin ? (
           <div className="win-message">
@@ -23,6 +23,14 @@ function Board(props) {
             <button className="btn btn-warning" style={{ color: 'white', border: 'none' }} onClick={handleNewGameIndex}>
               New Game
             </button>
+            <button className="btn btn-danger" onClick={handleQuitGame}>
+              Quit
+            </button>
+          </div>
+        ) : props.game.gameOver ? (
+          <div className="game-over-message">
+            <h4>Game Over</h4>
+            <p>{props.game.player.username} won the game!</p>
             <button className="btn btn-danger" onClick={handleQuitGame}>
               Quit
             </button>
@@ -45,10 +53,13 @@ function Board(props) {
                 -1
               </Button>
             </div>
+            {props.game.number && <span>steps: {props.game.numberOfSteps}</span>}
+            <br />
+            <button className="btn btn-danger mt-2" onClick={handleQuitGame}>
+              Quit
+            </button>
           </>
         )}
-
-        {props.game.number && <span>steps: {props.game.numberOfSteps}</span>}
       </div>
     </div>
   );

@@ -100,3 +100,21 @@ body {
   text-align: center;
   overflow-y: auto;
 }
+
+.add-player-btn {
+  color: #F551D7;
+  border: 2px solid rgb(255, 0, 187);
+  width: 75%;
+  height: 85px;
+  font-size: 1.5em;
+  background-color: transparent;
+}
+
+.add-player-btn:hover {
+  color: white;
+}
+
+.btn:focus {
+  outline: none; 
+  box-shadow: none; 
+}
