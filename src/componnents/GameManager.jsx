@@ -11,16 +11,27 @@ function GameManager() {
     const isWinGame = useRef(false);
 
     const quitGame = (index) => {
-        if (isWinGame.current) {
-            // If a game has ended, clear all games
-            setIsGameStart(false);
-            setCurrentGames([]);
-        } else {
-            // Remove specific game card
-            setCurrentGames((prevGames) => prevGames.filter((game, i) => i !== index)); 
-        }
-        isWinGame.current = false;
-    };
+      setCurrentGames((prevGames) => {
+          const nextGames = prevGames.filter((game, i) => i !== index);
+
+          // Check if the quitting player is the current active player
+          if (prevGames[index] && !prevGames[index].disable) {
+              const nextPlayerIndex = (index + 1) % prevGames.length;
+              if (nextGames.length > 0) {
+                  nextGames[nextPlayerIndex % nextGames.length].disable = false;
+              }
+          }
+
+          // Handle game ending
+          if (isWinGame.current || nextGames.length === 0) {
+              setIsGameStart(false);
+              return [];
+          }
+
+          return nextGames;
+      });
+      isWinGame.current = false;
+  };
 
     const addPlayer = (player) => {
         setCurrentGames((prevGames) => [
