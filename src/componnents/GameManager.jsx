@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import Registeration from "./Registeration"
+import Registeration from "./Registeration";
 import Board from "./Board";
 
 const MinNumber = 98;
@@ -11,15 +11,22 @@ function GameManager() {
     const isWinGame = useRef(false);
 
     const quitGame = (index) => {
+        if (isWinGame.current) {
+            // If a game has ended, clear all games
+            setIsGameStart(false);
+            setCurrentGames([]);
+        } else {
+            // Remove specific game card
+            setCurrentGames((prevGames) => prevGames.filter((game, i) => i !== index)); 
+        }
         isWinGame.current = false;
-        setCurrentGames((prevGames) => prevGames.filter((game, i) => i !== index));
-      };
+    };
 
     const addPlayer = (player) => {
         setCurrentGames((prevGames) => [
             ...prevGames,
             { player: player, disable: true },
-          ]);
+        ]);
     };
 
     const startGame = () => {
@@ -43,81 +50,81 @@ function GameManager() {
             let players = JSON.parse(localStorage.getItem("players")) || [];
             let player = game.player;
             let playerIndex = players.findIndex(
-              (storagePlayer) => storagePlayer.email === player.email
+                (storagePlayer) => storagePlayer.email === player.email
             );
             if (playerIndex !== -1) {
-              players[playerIndex].AllScores = [
-                ...players[playerIndex].AllScores,
-                numberOfSteps,
-              ];
-              localStorage.setItem("players", JSON.stringify(players));
+                players[playerIndex].AllScores = [
+                    ...players[playerIndex].AllScores,
+                    numberOfSteps,
+                ];
+                localStorage.setItem("players", JSON.stringify(players));
             }
             return {
-              player: player,
-              number: number,
-              numberOfSteps: numberOfSteps,
-              isWin: true,
+                player: player,
+                number: number,
+                numberOfSteps: numberOfSteps,
+                isWin: true,
             };
-          }
-          return game;
-      }
+        }
+        return game;
+    }
 
-    const isOnePlayer = () => currentGames.length == 1;   
-    
+    const isOnePlayer = () => currentGames.length == 1;
+
     const handleMove = (move, index) => {
-      setCurrentGames((prevGames) =>
-        prevGames.map((game, i) => {
-          if (i === index) {
-            const newNumber = eval(`${game.number} ${move}`);
-            const isWin = newNumber === 100;
-            if (isWin && !isWinGame.current) {
-              isWinGame.current = true;
-              return winGame(game);
-            } else {
-              return {
-                ...game,
-                disable: !isOnePlayer(),
-                number: newNumber,
-                numberOfSteps: game.numberOfSteps + 1,
-                isWin: isWin,
-              };
-            }
-          } else if ((index + 1) % prevGames.length === i) {
-            return { ...game, disable: false };
-          } else {
-            return game;
-          }
-        }).map(game => {
-          if (isWinGame.current) {
-            return {
-              ...game,
-              disable: true,
-              gameOver: true,
-            }
-          }
-          return game;
-        })
-      );
+        setCurrentGames((prevGames) =>
+            prevGames.map((game, i) => {
+                if (i === index) {
+                    const newNumber = eval(`${game.number} ${move}`);
+                    const isWin = newNumber === 100;
+                    if (isWin && !isWinGame.current) {
+                        isWinGame.current = true;
+                        return winGame(game);
+                    } else {
+                        return {
+                            ...game,
+                            disable: !isOnePlayer(),
+                            number: newNumber,
+                            numberOfSteps: game.numberOfSteps + 1,
+                            isWin: isWin,
+                        };
+                    }
+                } else if ((index + 1) % prevGames.length === i) {
+                    return { ...game, disable: false };
+                } else {
+                    return game;
+                }
+            }).map(game => {
+                if (isWinGame.current) {
+                    return {
+                        ...game,
+                        disable: true,
+                        gameOver: true,
+                    }
+                }
+                return game;
+            })
+        );
     };
 
     const handleNewGame = (gameToStart) => {
         isWinGame.current = false;
         setCurrentGames((prevGames) =>
-          prevGames.map((game) =>
-            game === gameToStart
-              ? {
-                  ...game,
-                  disable: !isOnePlayer(),
-                  number: Math.floor(
-                    Math.random() * (maxNumber - MinNumber) + MinNumber
-                  ),
-                  isWin: false,
-                  numberOfSteps: 0,
-                }
-              : game
-          )
+            prevGames.map((game) =>
+                game === gameToStart
+                    ? {
+                        ...game,
+                        disable: !isOnePlayer(),
+                        number: Math.floor(
+                            Math.random() * (maxNumber - MinNumber) + MinNumber
+                        ),
+                        isWin: false,
+                        numberOfSteps: 0,
+                    }
+                    : game
+            )
         );
-      };
+    };
 
     return (
         <>
@@ -126,11 +133,11 @@ function GameManager() {
                     <div className="start-game">
                         <Registeration addPlayer={addPlayer} />
                         <button type="button" onClick={startGame} disabled={!currentGames.length}>
-                            <img src="https://media.giphy.com/media/EEf5PgJnnNZyGvhoSC/giphy.gif" alt="Start Game"/>
+                            <img src="https://media.giphy.com/media/EEf5PgJnnNZyGvhoSC/giphy.gif" alt="Start Game" />
                         </button>
                     </div>
                 )}
-                
+
                 <div className="row">
                     <div className="top-players">
                         <h3>Top Players will be shown here</h3>
