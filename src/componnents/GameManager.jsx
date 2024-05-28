@@ -2,8 +2,8 @@ import React, { useState, useRef } from "react";
 import Registeration from "./Registeration"
 import Board from "./Board";
 
-const MinNumber = 75;
-const maxNumber = 95;
+const MinNumber = 98;
+const maxNumber = 99;
 
 function GameManager() {
     const [currentGames, setCurrentGames] = useState([]);
@@ -65,30 +65,39 @@ function GameManager() {
     const isOnePlayer = () => currentGames.length == 1;   
     
     const handleMove = (move, index) => {
-        setCurrentGames((prevGames) =>
-            prevGames.map((game, i) => {
-              if (i === index) {
-                const newNumber = eval(`${game.number} ${move}`);
-                const isWin = newNumber === 100;
-                if (isWin && !isWinGame.current) {
-                    isWinGame.current = true;
-                  return winGame(game);
-                } else {
-                  return {
-                    ...game,
-                    disable: !isOnePlayer(),
-                    number: newNumber,
-                    numberOfSteps: game.numberOfSteps + 1,
-                    isWin: isWin,
-                  };
-                }
-              } else if ((index + 1) % prevGames.length === i) {
-                return { ...game, disable: false };
-              } else {
-                return game;
-              }
-            })
-          );
+      setCurrentGames((prevGames) =>
+        prevGames.map((game, i) => {
+          if (i === index) {
+            const newNumber = eval(`${game.number} ${move}`);
+            const isWin = newNumber === 100;
+            if (isWin && !isWinGame.current) {
+              isWinGame.current = true;
+              return winGame(game);
+            } else {
+              return {
+                ...game,
+                disable: !isOnePlayer(),
+                number: newNumber,
+                numberOfSteps: game.numberOfSteps + 1,
+                isWin: isWin,
+              };
+            }
+          } else if ((index + 1) % prevGames.length === i) {
+            return { ...game, disable: false };
+          } else {
+            return game;
+          }
+        }).map(game => {
+          if (isWinGame.current) {
+            return {
+              ...game,
+              disable: true,
+              gameOver: true,
+            }
+          }
+          return game;
+        })
+      );
     };
 
     const handleNewGame = (gameToStart) => {
