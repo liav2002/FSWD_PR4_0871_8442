@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import Registeration from "./Registeration";
 import Board from "./Board";
+import TopPlayersModal from "./TopPlayersModal";
 
 const MinNumber = 98;
 const maxNumber = 99;
@@ -8,7 +9,7 @@ const maxNumber = 99;
 function GameManager() {
     const [currentGames, setCurrentGames] = useState([]);
     const [isGameStart, setIsGameStart] = useState(false);
-    const [loggedInPlayers, setLoggedInPlayers] = useState([]); 
+    const [loggedInPlayers, setLoggedInPlayers] = useState([]);
     const isWinGame = useRef(false);
 
     const quitGame = (index) => {
@@ -31,14 +32,13 @@ function GameManager() {
 
           return nextGames;
       });
+
+      setLoggedInPlayers((prevPlayers) => prevPlayers.filter((player, i) => i !== index));
       isWinGame.current = false;
   };
 
   const addPlayer = (player) => {
-      // Update loggedInPlayers state with the new player
       setLoggedInPlayers(prevPlayers => [...prevPlayers, player]);
-
-      // Add the player to the current games
       setCurrentGames((prevGames) => [
           ...prevGames,
           { player: player, disable: true },
@@ -85,7 +85,7 @@ function GameManager() {
       return game;
   }
 
-  const isOnePlayer = () => currentGames.length == 1;
+  const isOnePlayer = () => currentGames.length === 1;
 
   const handleMove = (move, index) => {
     setCurrentGames((prevGames) => 
@@ -124,11 +124,10 @@ function GameManager() {
   };
 
   const handleNewGame = () => {
-    // Initialize the current games with the logged-in players
+    setLoggedInPlayers([]);
     setCurrentGames(loggedInPlayers.map(player => ({ player: player, disable: true })));
-
-    // Set the game start state to false
     setIsGameStart(false);
+    isWinGame.current = false;
   };
 
   return (
@@ -136,6 +135,7 @@ function GameManager() {
           <div className="container-fluid">
               {!isGameStart && (
                   <div className="start-game">
+                      <TopPlayersModal/>
                       <Registeration addPlayer={addPlayer} currentGames={currentGames} />
                       <button type="button" onClick={startGame} disabled={!currentGames.length}>
                           <img src="https://media.giphy.com/media/EEf5PgJnnNZyGvhoSC/giphy.gif" alt="Start Game" />
@@ -144,10 +144,6 @@ function GameManager() {
               )}
 
               <div className="row">
-                  <div className="top-players">
-                      <h3>Top Players will be shown here</h3>
-                  </div>
-
                   <div className="game-board">
                       {currentGames.map((game, index) => (
                           <Board
@@ -155,6 +151,7 @@ function GameManager() {
                               key={index}
                               index={index}
                               game={game}
+                              isGameStart={isGameStart}
                               handleMove={handleMove}
                               currentGames={currentGames}
                               quitGame={quitGame}

@@ -20,7 +20,7 @@ function Board(props) {
           <div className="win-message">
             <h4>You Did It!</h4>
             <p>You have won the game!</p>
-            <button className="btn btn-warning" style={{ color: 'white', border: 'none' }} onClick={handleNewGameIndex}>
+            <button className="new-game-btn" style={{ color: 'white', border: 'none' }} onClick={handleNewGameIndex}>
               New Game
             </button>
             <button className="btn btn-danger" onClick={handleQuitGame}>
@@ -40,22 +40,22 @@ function Board(props) {
             <span className='blink'>{props.game.disable ? 'Waiting..' : 'Your turn..'}</span>
             {props.game.number && <p>Random Number: {props.game.number}</p>}
             <div>
-              <Button variant="btn btn-warning" style={{ color: 'white', border: 'none' }} disabled={props.game.disable} className="btn btn-primary mr-2" onClick={() => props.handleMove('/ 2', props.index)}>
+              <Button variant="btn" style={{ color: 'white', border: 'none' }} disabled={props.game.disable} className="btn btn-primary mr-2" onClick={() => props.handleMove('/ 2', props.index)}>
                 /2
               </Button>
-              <Button variant="btn btn-warning" style={{ color: 'white', border: 'none' }} disabled={props.game.disable} className="btn btn-primary mr-2" onClick={() => props.handleMove('* 2', props.index)}>
+              <Button variant="btn" style={{ color: 'white', border: 'none' }} disabled={props.game.disable} className="btn btn-primary mr-2" onClick={() => props.handleMove('* 2', props.index)}>
                 *2
               </Button>
-              <Button variant="btn btn-warning" style={{ color: 'white', border: 'none' }} disabled={props.game.disable} className="btn btn-primary mr-2" onClick={() => props.handleMove('+ 1', props.index)}>
+              <Button variant="btn" style={{ color: 'white', border: 'none' }} disabled={props.game.disable} className="btn btn-primary mr-2" onClick={() => props.handleMove('+ 1', props.index)}>
                 +1
               </Button>
-              <Button variant="btn btn-warning" style={{ color: 'white', border: 'none' }} disabled={props.game.disable} className="btn btn-primary" onClick={() => props.handleMove('- 1', props.index)}>
+              <Button variant="btn" style={{ color: 'white', border: 'none' }} disabled={props.game.disable} className="btn btn-primary" onClick={() => props.handleMove('- 1', props.index)}>
                 -1
               </Button>
             </div>
             {props.game.number && <span>steps: {props.game.numberOfSteps}</span>}
             <br />
-            <button className="btn btn-danger mt-2" onClick={handleQuitGame}>
+            <button className="btn btn-danger mt-2" onClick={handleQuitGame} disabled={props.game.disable && props.isGameStart}>
               Quit
             </button>
           </>

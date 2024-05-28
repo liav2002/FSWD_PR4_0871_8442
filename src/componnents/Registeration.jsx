@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css'; // Assuming you create a CSS file for the styles
+import '../App.css'; 
 
 function Registeration(props) {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -67,10 +67,7 @@ function Registeration(props) {
 
   return (
     <div className="container">
-      <Button
-        className="add-player-btn"
-        onClick={handleToggle}
-      >
+      <Button className="add-player-btn" onClick={handleToggle}>
         Add Player
       </Button>
       <Modal className='modal-lg' show={showModal} onHide={closeModal}>
