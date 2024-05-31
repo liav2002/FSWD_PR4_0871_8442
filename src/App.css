@@ -5,6 +5,18 @@
   text-align: center;
 }
 
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  margin: 20px;
+}
+
+button {
+  margin: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
