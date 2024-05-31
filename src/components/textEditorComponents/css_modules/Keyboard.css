@@ -1,0 +1,21 @@
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.keyboard-row {
+  display: flex;
+  margin: 5px 0;
+}
+
+button {
+  margin: 2px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.shift-active {
+  background-color: #d3d3d3;
+  color: #000;
+}
