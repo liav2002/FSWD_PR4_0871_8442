@@ -1,8 +1,8 @@
-
+import './css_modules/TextArea.css';
 function TextArea({ content}){
 
   return (
-    <div>
+    <div className="TextArea">
       {content.map((item, index) => 
         <span key={index} style={{
           color: item.color,

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Keyboard from './Keyboard';
 import TextArea from './TextArea';
 import Toolbar from './Toolbar';
-import './css_modules/TextEditor.module.css';
+import './css_modules/TextEditor.css';
 
 function TextEditor() {
   const [content, setContent] = useState([]);
@@ -16,12 +16,11 @@ function TextEditor() {
   const [isUnderline, setIsUnderline] = useState(false);
   const [selectedFont, setSelectedFont] = useState('Arial');
   const [selectedFontSize, setSelectedFontSize] = useState(16);
-  const [selectedColor, setSelectedColor] = useState('#FFFFFF'); //white
+  const [selectedColor, setSelectedColor] = useState('#000000'); //white
 
 
 
   function keyPressHandler(key) {
-    console.log(key);
     
     const newContent = {
         value: key,
@@ -37,18 +36,27 @@ function TextEditor() {
         if (history.length > 0) {
             setContent(history[history.length - 1]);
         }
-        //setContent(content.slice(0, -1));
     } else if (key === 'clear') {
         setHistory(prevHistory => [...prevHistory, content]);
         setContent([]);
-    } else {
+    } else if (key === 'delete') {
+        setHistory(prevHistory => [...prevHistory, content]);
+        setContent(content.slice(0, -1));
+    } else if (key === 'uppercase') {
+      setHistory(prevHistory => [...prevHistory, content]);
+      setContent(c => c.map(item => ({...item, value: item.value.toUpperCase()})));
+    } else if (key === 'lowercase') {
+      setHistory(prevHistory => [...prevHistory, content]);
+      setContent(c => c.map(item => ({...item, value: item.value.toLowerCase()})));
+    }
+     else {
         setHistory(prevHistory => [...prevHistory, content]);
         setContent(prevContent => [...prevContent, newContent]);
     }
   }
 
   return (
-    <div className="App">
+    <div className="TextEditor">
       <TextArea content={content}/>
       <Toolbar
         isEnglish={isEnglish}

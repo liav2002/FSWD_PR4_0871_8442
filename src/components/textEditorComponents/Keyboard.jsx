@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./css_modules/Keyboard.module.css";
+import "./css_modules/Keyboard.css";
 
 const specialKeys = "~!@#$%^&*()_+".split("");
 const numberKeys = "`1234567890-=".split("");
@@ -59,11 +59,14 @@ function Keyboard({ onKeyPress, isEnglish, isUpperCase }) {
           >
             Shift
           </button>
+          <button onClick={() => handleKeyPress("delete")}>Delete</button>
           <button onClick={() => handleKeyPress("\n")}>Enter</button>
           <button onClick={() => handleKeyPress(" ")}>Space</button>
           <br />
           <button onClick={() => handleKeyPress("undo")}>Undo</button>
           <button onClick={() => handleKeyPress("clear")}>Clear</button>
+          <button onClick={() => handleKeyPress("uppercase")}>Uppercase All</button>
+          <button onClick={() => handleKeyPress("lowercase")}>Lowercase All</button>
         </div>
       </div>
     </div>

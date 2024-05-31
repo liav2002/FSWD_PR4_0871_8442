@@ -1,0 +1,8 @@
+.TextArea{
+    height: 7rem;
+    width: 37em;
+    margin: auto;
+    overflow-y: auto;
+    overflow-wrap: break-word;
+    border: 1px solid;
+}
