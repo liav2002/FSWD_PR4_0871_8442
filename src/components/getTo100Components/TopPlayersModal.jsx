@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css'; 
+import '/src/App.css'; 
 
 function TopPlayersModal({ onClose }) {
     const [showModal, setShowModal] = useState(false);

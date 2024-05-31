@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import GameManager from './componnents/GameManager'
-import TextEditor from './componnents/textEditorComponents/TextEditor'
+import GameManager from './components/getTo100Components/GameManager'
+import TextEditor from './components/textEditorComponents/TextEditor'
 import './App.css'
 
 function App() {
