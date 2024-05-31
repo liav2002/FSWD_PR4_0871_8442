@@ -4,7 +4,6 @@ import TextEditor from './components/textEditorComponents/TextEditor'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
   const [selectedComponent, setSelectedComponent] = useState(null)
 
   const renderComponent = () => {

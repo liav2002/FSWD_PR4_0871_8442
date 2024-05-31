@@ -60,7 +60,7 @@ function Keyboard({ onKeyPress, isEnglish, isUpperCase }) {
             Shift
           </button>
           <button onClick={() => handleKeyPress("delete")}>Delete</button>
-          <button onClick={() => handleKeyPress("\n")}>Enter</button>
+          <button onClick={() => handleKeyPress("enter")}>Enter</button>
           <button onClick={() => handleKeyPress(" ")}>Space</button>
           <br />
           <button onClick={() => handleKeyPress("undo")}>Undo</button>

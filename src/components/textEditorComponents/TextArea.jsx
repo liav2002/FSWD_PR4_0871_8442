@@ -1,5 +1,5 @@
 import './css_modules/TextArea.css';
-function TextArea({ content}){
+function TextArea({content}){
 
   return (
     <div className="TextArea">

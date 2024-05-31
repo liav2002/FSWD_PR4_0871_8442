@@ -16,7 +16,7 @@ function TextEditor() {
   const [isUnderline, setIsUnderline] = useState(false);
   const [selectedFont, setSelectedFont] = useState('Arial');
   const [selectedFontSize, setSelectedFontSize] = useState(16);
-  const [selectedColor, setSelectedColor] = useState('#000000'); //white
+  const [selectedColor, setSelectedColor] = useState('#000000'); 
 
 
 
@@ -35,6 +35,7 @@ function TextEditor() {
     if (key === 'undo') {
         if (history.length > 0) {
             setContent(history[history.length - 1]);
+            setHistory(prevHistory => prevHistory.slice(0, -1));
         }
     } else if (key === 'clear') {
         setHistory(prevHistory => [...prevHistory, content]);
@@ -48,6 +49,9 @@ function TextEditor() {
     } else if (key === 'lowercase') {
       setHistory(prevHistory => [...prevHistory, content]);
       setContent(c => c.map(item => ({...item, value: item.value.toLowerCase()})));
+    } else if (key === 'enter') {
+      setHistory(prevHistory => [...prevHistory, content]);
+      setContent(prevContent => [...prevContent, {value: <br/>}]);
     }
      else {
         setHistory(prevHistory => [...prevHistory, content]);
